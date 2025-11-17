@@ -41,3 +41,64 @@ export const siteSettingsQuery = `
     "defaultOgImage": defaultOgImage.asset->url
   }
 `;
+
+export const homePageQuery = `
+  *[_type == "homePage"][0]{
+    hero{
+      title,
+      tagline,
+      ctas,
+      "backgroundImage": backgroundImage.asset->url
+    },
+    about{
+      title,
+      paragraphs,
+      "images": images[]{
+        "url": asset->url,
+        "alt": coalesce(alt, "")
+      }
+    },
+    embeddedVideo{
+      videoUrl,
+      "poster": poster.asset->url
+    },
+    servicesSection{
+      title,
+      paragraph,
+      services[]->{
+        title,
+        description,
+        keynotes
+      }
+    },
+    testimonialsSection{
+      title,
+      paragraph,
+      testimonials[]->{
+        fullname,
+        profession,
+        comment,
+        rating,
+        "photo": photo.asset->url
+      }
+    },
+    teamSection{
+      title,
+      paragraph,
+      teamMembers[]->{
+        fullname,
+        role,
+        "photo": photo.asset->url,
+        socials[]{
+          platform,
+          url
+        }
+      }
+    },
+    contact{
+      title,
+      ctas,
+      "backgroundImage": backgroundImage.asset->url
+    }
+  }
+`;

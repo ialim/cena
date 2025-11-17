@@ -195,13 +195,17 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps<BlogPostPageProps> = async ({
   params,
+  preview = false,
 }) => {
   const slug = params?.slug as string;
+  const fetchOptions = preview
+    ? { perspective: "drafts" as const, useCdn: false, stega: true }
+    : undefined;
 
   try {
     const [post, settings] = await Promise.all([
-      sanity.fetch<BlogPost>(postBySlugQuery, { slug }),
-      sanity.fetch<SiteSettings | null>(siteSettingsQuery),
+      sanity.fetch<BlogPost>(postBySlugQuery, { slug }, fetchOptions),
+      sanity.fetch<SiteSettings | null>(siteSettingsQuery, {}, fetchOptions),
     ]);
 
     return {

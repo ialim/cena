@@ -3,13 +3,17 @@ import dynamic from "next/dynamic";
 import { useState } from "react";
 
 export interface EmbeddedVideoProps {
-    videoUrl?: string;
+  videoUrl?: string;
+  posterImage?: string;
 }
 
 const { play } = SVG;
 const ReactPlayer = dynamic(() => import("react-player"), { ssr: false });
 
-const EmbededVideo = ({videoUrl = "https://www.youtube.com/embed/r9jwGansp1E"}: EmbeddedVideoProps) => {
+const EmbededVideo = ({
+  videoUrl = "https://www.youtube.com/embed/r9jwGansp1E",
+  posterImage = "/images/cover-embed.png",
+}: EmbeddedVideoProps) => {
   const [playing, setPlaying] = useState(false);
   const onClick = () => {
     setPlaying(true);
@@ -20,7 +24,7 @@ const EmbededVideo = ({videoUrl = "https://www.youtube.com/embed/r9jwGansp1E"}: 
         <div
           className="bg-no-repeat bg-cover bg-center text-white rounded-md"
           style={{
-            backgroundImage: `url(/images/cover-embed.png)`,
+            backgroundImage: `url(${posterImage})`,
             height: "32rem",
           }}
         >

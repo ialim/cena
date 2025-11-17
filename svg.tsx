@@ -253,7 +253,7 @@ export const SVG = {
     </svg>
   ),
 
-  baileswarrants: (
+  bailswarrants: (
     <svg
       width="73"
       height="72"

@@ -151,11 +151,17 @@ const BlogPage = ({ posts, settings }: BlogPageProps) => {
   );
 };
 
-export const getStaticProps: GetStaticProps<BlogPageProps> = async () => {
+export const getStaticProps: GetStaticProps<BlogPageProps> = async ({
+  preview = false,
+}) => {
+  const fetchOptions = preview
+    ? { perspective: "drafts" as const, useCdn: false, stega: true }
+    : undefined;
+
   try {
     const [posts, settings] = await Promise.all([
-      sanity.fetch<BlogPost[]>(blogPostsQuery),
-      sanity.fetch<SiteSettings | null>(siteSettingsQuery),
+      sanity.fetch<BlogPost[]>(blogPostsQuery, {}, fetchOptions),
+      sanity.fetch<SiteSettings | null>(siteSettingsQuery, {}, fetchOptions),
     ]);
 
     return {
