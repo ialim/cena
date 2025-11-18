@@ -134,6 +134,23 @@ export const homePageType = defineType({
               type: "reference",
               to: [{ type: "service" }],
             }),
+            defineArrayMember({
+              type: "object",
+              fields: [
+                defineField({
+                  name: "title",
+                  title: "Title",
+                  type: "string",
+                  validation: (Rule) => Rule.required(),
+                }),
+                defineField({
+                  name: "keynotes",
+                  title: "Keynotes",
+                  type: "array",
+                  of: [defineArrayMember({ type: "string" })],
+                }),
+              ],
+            }),
           ],
         }),
       ],
@@ -164,6 +181,40 @@ export const homePageType = defineType({
               type: "reference",
               to: [{ type: "testimonial" }],
             }),
+            defineArrayMember({
+              type: "object",
+              fields: [
+                defineField({
+                  name: "fullname",
+                  title: "Full name",
+                  type: "string",
+                  validation: (Rule) => Rule.required(),
+                }),
+                defineField({
+                  name: "profession",
+                  title: "Profession",
+                  type: "string",
+                }),
+                defineField({
+                  name: "comment",
+                  title: "Comment",
+                  type: "text",
+                  rows: 4,
+                }),
+                defineField({
+                  name: "rating",
+                  title: "Rating",
+                  type: "number",
+                  validation: (Rule) => Rule.min(0).max(5),
+                }),
+                defineField({
+                  name: "photo",
+                  title: "Photo",
+                  type: "image",
+                  options: { hotspot: true },
+                }),
+              ],
+            }),
           ],
         }),
       ],
@@ -193,6 +244,53 @@ export const homePageType = defineType({
             defineArrayMember({
               type: "reference",
               to: [{ type: "teamMember" }],
+            }),
+            defineArrayMember({
+              type: "object",
+              fields: [
+                defineField({
+                  name: "fullname",
+                  title: "Full name",
+                  type: "string",
+                  validation: (Rule) => Rule.required(),
+                }),
+                defineField({
+                  name: "role",
+                  title: "Role",
+                  type: "string",
+                }),
+                defineField({
+                  name: "photo",
+                  title: "Photo",
+                  type: "image",
+                  options: { hotspot: true },
+                }),
+                defineField({
+                  name: "socials",
+                  title: "Social Links",
+                  type: "array",
+                  of: [
+                    defineArrayMember({
+                      type: "object",
+                      fields: [
+                        defineField({
+                          name: "platform",
+                          title: "Platform",
+                          type: "string",
+                          options: {
+                            list: socialOptions,
+                          },
+                        }),
+                        defineField({
+                          name: "url",
+                          title: "URL",
+                          type: "url",
+                        }),
+                      ],
+                    }),
+                  ],
+                }),
+              ],
             }),
           ],
         }),

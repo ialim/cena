@@ -139,7 +139,7 @@ export const HeroImage = ({
               <select
                 {...register("available", { required: "This is required" })}
                 id="available"
-                onChange={() => {}}
+                defaultValue="13:00"
                 className="my-2 appearance-none border-brand-border border-2 bg-brand-input rounded-md py-3 pl-5 w-full lg:w-80 font-BasierCircle font-normal text-sm text-brand-secondary"
               >
                 <option value="13:00">13:00 Available</option>
@@ -175,11 +175,12 @@ export const HeroImage = ({
                 </p>
               )}
               <div className="mt-12 flex">
-                <input
-                  type="Submit"
-                  value="Book Appointment"
+                <button
+                  type="submit"
                   className="py-4 w-full lg:px-28 lg:w-80 font-bold font-BasierCircle text-sm text-center rounded-md bg-brand-dark"
-                />
+                >
+                  Book Appointment
+                </button>
               </div>
             </form>
           </div>

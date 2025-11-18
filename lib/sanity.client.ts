@@ -15,4 +15,10 @@ export const sanity = createClient({
   apiVersion: process.env.SANITY_API_VERSION || "2023-01-01",
   useCdn: process.env.NODE_ENV === "production",
   token: process.env.SANITY_READ_TOKEN,
+  stega: {
+    studioUrl:
+      process.env.NEXT_PUBLIC_SANITY_STUDIO_URL ||
+      process.env.SANITY_STUDIO_PREVIEW_ORIGIN ||
+      "http://localhost:3000",
+  },
 });
